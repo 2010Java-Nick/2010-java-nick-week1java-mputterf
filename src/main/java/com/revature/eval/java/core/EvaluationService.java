@@ -93,18 +93,24 @@ public class EvaluationService {
 		}
 
 		public boolean isEquilateral() {
-			// TODO Write an implementation for this method declaration
-			return false;
+//			If sideOne is equal to sideTwo and sideOne is equal to sideThree, then all
+//			three sides must have the same value. The && will make sure true is returned if
+//			both sides are true. Else, false will be returned
+			return ((this.sideOne == this.sideTwo) && (this.sideOne == this.sideThree));
 		}
 
 		public boolean isIsosceles() {
-			// TODO Write an implementation for this method declaration
-			return false;
+//			Similar to above, but with | will return true if at least one statement is true,
+//			since we want at least two sides to be the same (but all three can be too).
+//			Using | instead of || so both sides get evaluated.
+			return ((this.sideOne == this.sideTwo) | (this.sideOne == this.sideThree));
+			
 		}
 
 		public boolean isScalene() {
-			// TODO Write an implementation for this method declaration
-			return false;
+//			Since this is the opposite of an equilateral, we'll check for the opposite of what we
+//			did in isEquilateral();
+			return (!(this.sideOne == this.sideTwo) && !(this.sideOne == this.sideThree));
 		}
 
 	}
