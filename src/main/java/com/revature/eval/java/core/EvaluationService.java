@@ -30,8 +30,17 @@ public class EvaluationService {
 	 * @return
 	 */
 	public String acronym(String phrase) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		char[] acronym = new char[phrase.length()];
+		
+///		Using regex to split at non-alphabetical characters
+		String[] split = phrase.split("\\P{Alpha}+");
+		for (int i = 0; i < split.length; i++) {
+			acronym[i] = split[i].charAt(0);
+		}
+		
+//		convert the array that holds the acronym to a string, trim the ending whitespace,
+//		and make it uppercase since acronyms are uppercase.
+		return new String(acronym).trim().toUpperCase();
 	}
 
 	/**
