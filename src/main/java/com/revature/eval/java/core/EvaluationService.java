@@ -163,8 +163,10 @@ public class EvaluationService {
 		letterValues.put('Y', 4);
 		letterValues.put('Z', 10);
 
+//		Turn the string into a character array
 		char[] characters = string.toUpperCase().toCharArray();
 
+//		Get the value of each letter and add its value to the score counter.
 		for (int i = 0; i < characters.length; i++) {
 			score += letterValues.get(characters[i]);
 		}
@@ -204,8 +206,16 @@ public class EvaluationService {
 	 * NANP-countries, only 1 is considered a valid country code.
 	 */
 	public String cleanPhoneNumber(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+//		TODO Figure this out
+//		regex will match non-numeric characters and replace with empty string.
+//		Should leave us with only numbers.
+		char[] numberArr = string.replaceAll("[^0-9]", "").toCharArray();
+
+//		if (numberArr[0] == '1') {
+//			
+//		}
+//		
+		return string;
 	}
 
 	/**
@@ -219,7 +229,20 @@ public class EvaluationService {
 	 */
 	public Map<String, Integer> wordCount(String string) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		// Using regex to split at non-alphabetical characters
+		String[] split = string.split("\\P{Alpha}+");
+
+		Map<String, Integer> counter = new HashMap<>();
+
+		for (int i = 0; i < split.length; i++) {
+			if (counter.get(split[i]) != null) {
+				counter.put(split[i], counter.get(split[i]) + 1);
+			} else {
+				counter.put(split[i], 1);
+			}
+		}
+
+		return counter;
 	}
 
 	/**
