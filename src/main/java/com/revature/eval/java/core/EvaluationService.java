@@ -206,15 +206,19 @@ public class EvaluationService {
 	 * NANP-countries, only 1 is considered a valid country code.
 	 */
 	public String cleanPhoneNumber(String string) {
-//		TODO Figure this out
+
 //		regex will match non-numeric characters and replace with empty string.
 //		Should leave us with only numbers.
-		char[] numberArr = string.replaceAll("[^0-9]", "").toCharArray();
+		string = string.replaceAll("[^0-9]", "");
 
-//		if (numberArr[0] == '1') {
-//			
-//		}
-//		
+		if (string.charAt(0) == '1') {
+			string = string.substring(1);
+		}
+
+		if (string.length() > 11 || string.length() < 9) {
+			throw new IllegalArgumentException("Invalid number length");
+		}
+
 		return string;
 	}
 
@@ -228,12 +232,14 @@ public class EvaluationService {
 	 * @return
 	 */
 	public Map<String, Integer> wordCount(String string) {
-		// TODO Write an implementation for this method declaration
+
 		// Using regex to split at non-alphabetical characters
 		String[] split = string.split("\\P{Alpha}+");
 
 		Map<String, Integer> counter = new HashMap<>();
 
+//		if the key (word) already exists in the map, we'll get the number of occurrences and add +1.
+//		If it's not in the map, we'll add it and set it to 1 (first occurrence)
 		for (int i = 0; i < split.length; i++) {
 			if (counter.get(split[i]) != null) {
 				counter.put(split[i], counter.get(split[i]) + 1);
@@ -322,6 +328,29 @@ public class EvaluationService {
 	 */
 	public String toPigLatin(String string) {
 		// TODO Write an implementation for this method declaration
+		/// Using regex to split at non-alphabetical characters (in case of phrase)
+//		String[] split = string.split("\\P{Alpha}+");
+//
+//		String[] pigLatin = new String[split.length];
+//
+//		String finalPhrase = null;
+//
+//		char[] vowels = { 'a', 'e', 'i', 'o', 'u' };
+
+//		This is all wrong probably
+//		for (int i = 0; i < split.length; i++) {
+//			for (int j = 0; j < split[i].length(); j++) {
+//				for (int k = 0; k < vowels.length; k++) {
+//					if (split[i].charAt(j) != vowels[k]) {
+//						pigLatin[i] = split[i].substring(1) + split[i].charAt(0);
+//					} else {
+//						pigLatin[i] = pigLatin[i] + split[j] + "ay";
+//					}
+//				}
+//
+//			}
+//		}
+//		finalPhrase.join(",", pigLatin);
 		return null;
 	}
 
@@ -342,6 +371,7 @@ public class EvaluationService {
 	 */
 	public boolean isArmstrongNumber(int input) {
 		// TODO Write an implementation for this method declaration
+
 		return false;
 	}
 
