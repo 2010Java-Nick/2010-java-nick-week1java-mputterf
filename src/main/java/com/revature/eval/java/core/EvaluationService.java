@@ -1,6 +1,7 @@
 package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +16,7 @@ public class EvaluationService {
 	 */
 	public String reverse(String string) {
 		char[] reversed = new char[string.length()];
-		for (int i = reversed.length - 1, j=0; i >= 0; i--, j++) {
+		for (int i = reversed.length - 1, j = 0; i >= 0; i--, j++) {
 			reversed[j] = string.charAt(i);
 		}
 		return new String(reversed);
@@ -31,13 +32,13 @@ public class EvaluationService {
 	 */
 	public String acronym(String phrase) {
 		char[] acronym = new char[phrase.length()];
-		
+
 ///		Using regex to split at non-alphabetical characters
 		String[] split = phrase.split("\\P{Alpha}+");
 		for (int i = 0; i < split.length; i++) {
 			acronym[i] = split[i].charAt(0);
 		}
-		
+
 //		convert the array that holds the acronym to a string, trim the ending whitespace,
 //		and make it uppercase since acronyms are uppercase.
 		return new String(acronym).trim().toUpperCase();
@@ -104,7 +105,7 @@ public class EvaluationService {
 //			since we want at least two sides to be the same (but all three can be too).
 //			Using | instead of || so both sides get evaluated.
 			return ((this.sideOne == this.sideTwo) | (this.sideOne == this.sideThree));
-			
+
 		}
 
 		public boolean isScalene() {
@@ -131,8 +132,44 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int getScrabbleScore(String string) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+
+		int score = 0;
+
+		Map<Character, Integer> letterValues = new HashMap<>();
+		letterValues.put('A', 1);
+		letterValues.put('B', 3);
+		letterValues.put('C', 3);
+		letterValues.put('D', 2);
+		letterValues.put('E', 1);
+		letterValues.put('F', 4);
+		letterValues.put('G', 2);
+		letterValues.put('H', 4);
+		letterValues.put('I', 1);
+		letterValues.put('J', 8);
+		letterValues.put('K', 5);
+		letterValues.put('L', 1);
+		letterValues.put('M', 3);
+		letterValues.put('N', 1);
+		letterValues.put('O', 1);
+		letterValues.put('P', 3);
+		letterValues.put('Q', 10);
+		letterValues.put('R', 1);
+		letterValues.put('S', 1);
+		letterValues.put('T', 1);
+		letterValues.put('U', 1);
+		letterValues.put('V', 4);
+		letterValues.put('W', 4);
+		letterValues.put('X', 8);
+		letterValues.put('Y', 4);
+		letterValues.put('Z', 10);
+
+		char[] characters = string.toUpperCase().toCharArray();
+
+		for (int i = 0; i < characters.length; i++) {
+			score += letterValues.get(characters[i]);
+		}
+
+		return score;
 	}
 
 	/**
