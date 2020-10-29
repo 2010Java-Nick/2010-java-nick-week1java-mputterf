@@ -539,7 +539,28 @@ public class EvaluationService {
 	 */
 	public boolean isValidIsbn(String string) {
 		// TODO Write an implementation for this method declaration
-		return false;
+
+		string = reverse(string.replaceAll("[^0-9Xx]", ""));
+		int[] isbnDigitArr = new int[string.length()];
+		int isbnMultAccumulator = 0;
+
+		if (string.length() != 10) {
+			return false;
+		}
+
+		for (int i = 1; i < string.length() + 1; i++) {
+			if (string.charAt(i - 1) == 'x' || string.charAt(i - 1) == 'X') {
+				isbnMultAccumulator += 10 * i;
+			} else {
+				int isbnDigit = Integer.parseInt(String.valueOf(string.charAt(i - 1)));
+				isbnMultAccumulator += isbnDigit * i;
+			}
+
+//			isbnMultAccumulator += isbnDigitArr[i];
+		}
+
+		return (isbnMultAccumulator % 11 == 0 ? true : false);
+
 	}
 
 	/**
