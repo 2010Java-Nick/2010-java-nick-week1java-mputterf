@@ -1,6 +1,7 @@
 package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -327,31 +328,40 @@ public class EvaluationService {
 	 * @return
 	 */
 	public String toPigLatin(String string) {
-		// TODO Write an implementation for this method declaration
-		/// Using regex to split at non-alphabetical characters (in case of phrase)
-//		String[] split = string.split("\\P{Alpha}+");
-//
-//		String[] pigLatin = new String[split.length];
-//
-//		String finalPhrase = null;
-//
-//		char[] vowels = { 'a', 'e', 'i', 'o', 'u' };
 
-//		This is all wrong probably
-//		for (int i = 0; i < split.length; i++) {
-//			for (int j = 0; j < split[i].length(); j++) {
-//				for (int k = 0; k < vowels.length; k++) {
-//					if (split[i].charAt(j) != vowels[k]) {
-//						pigLatin[i] = split[i].substring(1) + split[i].charAt(0);
-//					} else {
-//						pigLatin[i] = pigLatin[i] + split[j] + "ay";
-//					}
-//				}
-//
-//			}
-//		}
-//		finalPhrase.join(",", pigLatin);
-		return null;
+		String[] split = string.split("\\s+");
+
+		List<String> newPhrase = new ArrayList<>();
+
+		for (int i = 0; i < split.length; i++) {
+
+			for (int j = 0; j < split[i].length(); j++) {
+				if (split[i].charAt(j) == 'q' && split[i].charAt(j + 1) == 'u') {
+					String temp1 = split[i].substring(0, j + 2);
+					String temp2 = split[i].substring(j + 2);
+					newPhrase.add(temp2 + temp1 + "ay" + " ");
+					break;
+				}
+				if (split[i].charAt(j) == 'a' || split[i].charAt(j) == 'e' || split[i].charAt(j) == 'i'
+						|| split[i].charAt(j) == 'o' || split[i].charAt(j) == 'u') {
+					String temp1 = split[i].substring(0, j);
+					String temp2 = split[i].substring(j);
+					newPhrase.add(temp2 + temp1 + "ay" + " ");
+					break;
+				}
+			}
+
+		}
+
+		if (newPhrase.isEmpty()) {
+			newPhrase.add(split[0] + "ay");
+		}
+
+		StringBuilder pigLatin = new StringBuilder();
+		for (String s : newPhrase) {
+			pigLatin.append(s);
+		}
+		return pigLatin.toString().trim();
 	}
 
 	/**
