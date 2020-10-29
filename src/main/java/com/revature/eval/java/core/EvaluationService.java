@@ -671,8 +671,46 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isLuhnValid(String string) {
-		// TODO Write an implementation for this method declaration
-		return false;
+//		remove spaces
+		string = string.replaceAll("\\s+", "");
+
+		char[] numAsCharArr = new char[string.length()];
+		int[] numArr = new int[numAsCharArr.length];
+		int calculated = 0;
+
+//		convert string to int array. If we fail to parse and int, then there is an invalid
+//		character in the string and we should return false (invalid Luhn number)
+		for (int i = 0; i < string.length(); i++) {
+			try {
+				numAsCharArr[i] = string.charAt(i);
+				numArr[i] = Integer.parseInt(String.valueOf(numAsCharArr[i]));
+			} catch (NumberFormatException e) {
+				return false;
+			}
+
+		}
+
+//		Start from the second to last element and work backwards, skipping every other element
+//		so that we double every other element. If the element becomes greater than 9, subtract 9
+		for (int i = numArr.length - 2; i >= 0; i -= 2) {
+			numArr[i] *= 2;
+			if (numArr[i] > 9) {
+				numArr[i] -= 9;
+			}
+		}
+
+//		Add all the elements, check if divisible by 10 (mod will return 0 if it is) and return our
+//		final result
+		for (int i = 0; i < numArr.length; i++) {
+			calculated += numArr[i];
+		}
+
+		if (calculated % 10 == 0) {
+			return true;
+		} else {
+			return false;
+		}
+
 	}
 
 	/**
