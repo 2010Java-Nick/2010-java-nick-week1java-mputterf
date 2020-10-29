@@ -578,8 +578,29 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isPangram(String string) {
-		// TODO Write an implementation for this method declaration
-		return false;
+
+		string = string.replaceAll("\\s+", "");
+
+		Map<Character, Integer> counter = new HashMap<>();
+
+//		if the key (char) already exists in the map, we'll get the number of occurrences and add +1.
+//		If it's not in the map, we'll add it and set it to 1 (first occurrence)
+
+		for (char c : string.toCharArray()) {
+			if (counter.get(c) != null) {
+				counter.put(c, counter.get(c) + 1);
+			} else {
+				counter.put(c, 1);
+			}
+		}
+
+//		if size is 26, we got all the letters at least once.
+		if (counter.size() == 26) {
+			return true;
+		} else {
+			return false;
+		}
+
 	}
 
 	/**
