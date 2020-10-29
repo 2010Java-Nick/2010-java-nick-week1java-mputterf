@@ -682,8 +682,29 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int solveWordProblem(String string) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+
+		String[] split = string.replaceAll("[^a-zA-Z0-9\\-\\s+]", "").split("\\s+");
+
+		String operation = split[3];
+		int result = 0;
+		int num1 = Integer.parseInt(split[2]);
+
+		switch (operation) {
+		case "plus":
+			result = num1 + Integer.parseInt(split[4]);
+			break;
+		case "minus":
+			result = num1 - Integer.parseInt(split[4]);
+			break;
+		case "multiplied":
+			result = num1 * Integer.parseInt(split[5]);
+			break;
+		case "divided":
+			result = num1 / Integer.parseInt(split[5]);
+
+		}
+
+		return result;
 	}
 
 }
