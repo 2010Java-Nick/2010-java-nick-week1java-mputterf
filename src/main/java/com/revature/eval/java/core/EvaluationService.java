@@ -370,7 +370,7 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isArmstrongNumber(int input) {
-		// TODO Write an implementation for this method declaration
+
 //		My hack-y solution to splitting an int. Convert to string so it can be split,
 //		turn the string into a char array
 //		turn the char array into an int array
@@ -383,6 +383,9 @@ public class EvaluationService {
 			numAsCharArr[i] = inputAsString.charAt(i);
 			numArr[i] = Integer.parseInt(String.valueOf(numAsCharArr[i]));
 
+//			We can update each element in the array to be raised to the length of the int arr
+//			(raise each digit to the number of digits of the input)
+//			Then we can add each to an accumulator which will compare the input to our calculated value
 			numArr[i] = (int) Math.pow((double) numArr[i], (double) numArr.length);
 			calculated += numArr[i];
 		}
