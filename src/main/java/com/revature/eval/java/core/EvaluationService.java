@@ -538,16 +538,18 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isValidIsbn(String string) {
-		// TODO Write an implementation for this method declaration
 
+//		We only want 0-9 and X
 		string = reverse(string.replaceAll("[^0-9Xx]", ""));
-		int[] isbnDigitArr = new int[string.length()];
 		int isbnMultAccumulator = 0;
 
+//		If the ISBN isn't 10 digits, it's not valid
 		if (string.length() != 10) {
 			return false;
 		}
 
+//		starting the loop at 1 for the multiplication, but need to accommodate that in the for loop's
+//		exit condition and charAt
 		for (int i = 1; i < string.length() + 1; i++) {
 			if (string.charAt(i - 1) == 'x' || string.charAt(i - 1) == 'X') {
 				isbnMultAccumulator += 10 * i;
@@ -556,7 +558,6 @@ public class EvaluationService {
 				isbnMultAccumulator += isbnDigit * i;
 			}
 
-//			isbnMultAccumulator += isbnDigitArr[i];
 		}
 
 		return (isbnMultAccumulator % 11 == 0 ? true : false);
