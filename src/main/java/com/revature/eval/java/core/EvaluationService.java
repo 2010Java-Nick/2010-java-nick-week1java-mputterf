@@ -414,7 +414,7 @@ public class EvaluationService {
 	 * @return
 	 */
 	public List<Long> calculatePrimeFactorsOf(long l) {
-		// TODO Write an implementation for this method declaration
+
 		List<Long> primeFactors = new ArrayList<Long>();
 
 		for (int i = 2; i <= l; i++) {
@@ -480,8 +480,41 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int calculateNthPrime(int i) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+
+		if (i < 1) {
+			throw new IllegalArgumentException("Please enter a number larger than 0");
+		}
+
+		int nthPrime = 0;
+		int currentNum = 0;
+		boolean isNotPrime = false;
+		int counter = 0;
+		while (counter < i + 1) {
+//			Our number to test
+			currentNum++;
+
+//			for loop will test if our current number is divisible by 2 to our current number
+			for (int j = 2; j < currentNum; j++) {
+//				if our number was divided, set the flag so our current number isn't set to be the current nth prime
+//				also break out of the loop as there is no point in continuing to test the current number
+				if (currentNum % j == 0) {
+					isNotPrime = true;
+					break;
+				}
+
+			}
+
+//			if the number is prime, set it to be the current nth prime
+			if (isNotPrime == false) {
+				nthPrime = currentNum;
+				counter++;
+			}
+
+//			reset our flag for the next round
+			isNotPrime = false;
+		}
+
+		return nthPrime;
 	}
 
 	/**
