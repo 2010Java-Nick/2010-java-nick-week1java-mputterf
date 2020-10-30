@@ -551,7 +551,7 @@ public class EvaluationService {
 		 * @return
 		 */
 		public static String encode(String string) {
-			// TODO Write an implementation for this method declaration
+
 			Map<Character, Character> rotatedValues = new HashMap<>();
 			rotatedValues.put('A', 'Z');
 			rotatedValues.put('B', 'Y');
