@@ -462,6 +462,7 @@ public class EvaluationService {
 
 		public String rotate(String string) {
 			// TODO Write an implementation for this method declaration
+
 			return null;
 		}
 
@@ -551,7 +552,71 @@ public class EvaluationService {
 		 */
 		public static String encode(String string) {
 			// TODO Write an implementation for this method declaration
-			return null;
+			Map<Character, Character> rotatedValues = new HashMap<>();
+			rotatedValues.put('A', 'Z');
+			rotatedValues.put('B', 'Y');
+			rotatedValues.put('C', 'X');
+			rotatedValues.put('D', 'W');
+			rotatedValues.put('E', 'V');
+			rotatedValues.put('F', 'U');
+			rotatedValues.put('G', 'T');
+			rotatedValues.put('H', 'S');
+			rotatedValues.put('I', 'R');
+			rotatedValues.put('J', 'Q');
+			rotatedValues.put('K', 'P');
+			rotatedValues.put('L', 'O');
+			rotatedValues.put('M', 'N');
+			rotatedValues.put('N', 'M');
+			rotatedValues.put('O', 'L');
+			rotatedValues.put('P', 'K');
+			rotatedValues.put('Q', 'J');
+			rotatedValues.put('R', 'I');
+			rotatedValues.put('S', 'H');
+			rotatedValues.put('T', 'G');
+			rotatedValues.put('U', 'F');
+			rotatedValues.put('V', 'E');
+			rotatedValues.put('W', 'D');
+			rotatedValues.put('X', 'C');
+			rotatedValues.put('Y', 'B');
+			rotatedValues.put('Z', 'A');
+			rotatedValues.put('0', 'A');
+			rotatedValues.put('1', '1');
+			rotatedValues.put('2', '2');
+			rotatedValues.put('3', '3');
+			rotatedValues.put('4', '4');
+			rotatedValues.put('5', '5');
+			rotatedValues.put('6', '6');
+			rotatedValues.put('7', '7');
+			rotatedValues.put('8', '8');
+			rotatedValues.put('9', '9');
+
+//			Turn the string into a character array
+			string = string.replaceAll("[^a-zA-Z0-9]", "");
+			char[] characters = string.toUpperCase().toCharArray();
+
+			char[] encoded = new char[characters.length];
+
+//			Get the value of each letter and add its value to the score counter.
+			for (int i = 0; i < characters.length; i++) {
+				if (!Character.isLetterOrDigit(characters[i])) {
+//					
+					continue;
+				}
+				encoded[i] = rotatedValues.get(characters[i]);
+			}
+
+			StringBuilder encodedString = new StringBuilder();
+			encodedString.append(encoded);
+
+			String encodedStringNoSpaces = encodedString.toString().toLowerCase();
+
+//			int j = encodedString.length();
+//			if (j % 5 == 0) {
+//				encodedString.insert(j, " ");
+//
+//			}
+
+			return encodedStringNoSpaces.toString().toLowerCase().replaceAll("(.{5})(?!$)", "$1\s");
 		}
 
 		/**
