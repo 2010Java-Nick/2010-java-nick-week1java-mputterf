@@ -415,7 +415,15 @@ public class EvaluationService {
 	 */
 	public List<Long> calculatePrimeFactorsOf(long l) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		List<Long> primeFactors = new ArrayList<Long>();
+
+		for (int i = 2; i <= l; i++) {
+			while (l % i == 0) {
+				primeFactors.add((long) i);
+				l = l / i;
+			}
+		}
+		return primeFactors;
 	}
 
 	/**
