@@ -789,8 +789,24 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int getSumOfMultiples(int i, int[] set) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+
+		int sumOfMults = 0;
+
+		for (int j = 0; j < i; j++) {
+
+			boolean isMultiple = false;
+			for (int k = 0; k < set.length; k++) {
+				if (j % set[k] == 0) {
+					isMultiple = true;
+				}
+			}
+
+			if (isMultiple) {
+				sumOfMults += j;
+			}
+
+		}
+		return sumOfMults;
 	}
 
 	/**
