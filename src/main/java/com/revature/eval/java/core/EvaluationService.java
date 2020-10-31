@@ -290,12 +290,37 @@ public class EvaluationService {
 	 * binary search is a dichotomic divide and conquer search algorithm.
 	 * 
 	 */
-	static class BinarySearch<T> {
+	static class BinarySearch<T extends Comparable<T>> {
 		private List<T> sortedList;
 
 		public int indexOf(T t) {
-			// TODO Write an implementation for this method declaration
-			return 0;
+
+			int lowerBound = 0;
+			int higherBound = sortedList.size() - 1;
+			int middle = sortedList.size() / 2;
+			int foundT = -1;
+
+			while (lowerBound <= higherBound) {
+
+//				If it's in between the bounds, result (foundT) to the current index and break out of the loop
+				if (sortedList.get(middle).equals(t)) {
+					foundT = middle;
+					break;
+				} else if (sortedList.get(middle).compareTo(t) < 0) {
+//					If the number we are searching for is smaller than our index, set the higher bound to one less than middle
+//					so we search the lower half of the array and find the new midpoint
+
+					lowerBound = ++middle;
+					middle = (lowerBound + higherBound) / 2;
+				} else {
+//					If the number was larger, set the lower bound to one greater than the middle and find new midpoint
+
+					higherBound = --middle;
+					middle = (higherBound + lowerBound) / 2;
+				}
+			}
+
+			return foundT;
 		}
 
 		public BinarySearch(List<T> sortedList) {
