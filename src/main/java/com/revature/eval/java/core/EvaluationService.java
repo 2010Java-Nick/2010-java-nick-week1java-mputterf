@@ -489,9 +489,36 @@ public class EvaluationService {
 		}
 
 		public String rotate(String string) {
-			// TODO Write an implementation for this method declaration
 
-			return null;
+			final String ALPHABET_UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+			final String ALPHABET_LOWER = "abcdefghijklmnopqrstuvwxyz";
+			StringBuilder encodedString = new StringBuilder();
+
+			for (int i = 0; i < string.length(); i++) {
+
+				if (String.valueOf(string.charAt(i)).matches("[A-Z]")) {
+
+//					Formula for Ceaser cipher is encoded = (text + key) mod 26.
+//					This is for encoding an uppercase character					
+					int encode = (key + ALPHABET_UPPER.indexOf(string.charAt(i))) % 26;
+					char encodedChar = ALPHABET_UPPER.charAt(encode);
+					encodedString.append(encodedChar);
+
+				} else if (String.valueOf(string.charAt(i)).matches("[a-z]")) {
+
+//					encoding a lowercase character					
+					int encode = (key + ALPHABET_LOWER.indexOf(string.charAt(i))) % 26;
+					char encodedChar = ALPHABET_LOWER.charAt(encode);
+					encodedString.append(encodedChar);
+
+				} else {
+//					If we get something that isn't a char, just add it straight to the new string we're building
+					encodedString.append(string.charAt(i));
+				}
+
+			}
+
+			return encodedString.toString();
 		}
 
 	}
