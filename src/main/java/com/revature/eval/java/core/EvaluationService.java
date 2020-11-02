@@ -662,7 +662,7 @@ public class EvaluationService {
 
 			String encodedStringNoSpaces = encodedString.toString().toLowerCase();
 
-			return encodedStringNoSpaces.toString().toLowerCase().replaceAll("(.{5})(?!$)", "$1\s");
+			return encodedStringNoSpaces.toString().toLowerCase().replaceAll("(.{5})(?!$)", "$1 ");
 		}
 
 		/**
